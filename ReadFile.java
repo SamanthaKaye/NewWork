@@ -92,24 +92,25 @@ public class ReadFile {
 						if(itemCode.contains("disc999001")) isDiscount = true;
 						else if(itemCode.contains("disc999002")) isDiscount = true;
 						else if(itemCode.contains("disc999003")) isDiscount = true;
-						else isDiscount = false;
+							else { isDiscount = false;}
+						
 						if(isDiscount == true) { 
 							discountCount++;
 						}
-						else discountCount = 0; 
+						else {discountCount = 0; }
 
 																		
 					}
-					else discountCount = 0; match = false;
+					else {discountCount = 0; match = false;}
 					
 					
 					//Compensation if no discounts
-					if(itemCode.contains("-L1")){thisItem = "L1"; compensation = 0.08; index = a; }											
-					else if(itemCode.contains("-L2")){ thisItem = "L2"; compensation = .10; index = a; }
-					else if(itemCode.contains("-L3")){ thisItem = "L3"; compensation = .13; index = a; }
-					else if(itemCode.contains("-L4")){ thisItem = "L4"; compensation = .13; index = a; }
-					else if(itemCode.contains("-L5")){ thisItem = "L5"; compensation = .13; index = a; }
-					else compensation = 0; index = a;
+					if(itemCode.contains("-L1")){thisItem = "L1"; compensation = 0.08; price = Double.parseDouble(priceArray[a]);  }											
+					else if(itemCode.contains("-L2")){ thisItem = "L2"; compensation = .10; price = Double.parseDouble(priceArray[a]);  }
+					else if(itemCode.contains("-L3")){ thisItem = "L3"; compensation = .13; price = Double.parseDouble(priceArray[a]);  }
+					else if(itemCode.contains("-L4")){ thisItem = "L4"; compensation = .13; price = Double.parseDouble(priceArray[a]);  }
+					else if(itemCode.contains("-L5")){ thisItem = "L5"; compensation = .13; price = Double.parseDouble(priceArray[a]);  }
+					else {compensation = 0; index = a + 1;}
 					
 					//Compensation if 1 discount
 					if(discountCount == 1) {
@@ -132,22 +133,26 @@ public class ReadFile {
 						else if(discountCount >= 3 && thisItem == "L4") compensation = .07;
 						else if(discountCount == 2 && thisItem == "L5") compensation = .10;
 						else if(discountCount >= 3 && thisItem == "L5") compensation = .07;
-						else compensation = 0;
+						else {compensation = 0;}
 					
 					}
 					
 					totalDiscountAmt = discountCount * .05;
-					if(isDiscount == true) newPrice = price - commissionableSales;
-					else price = Float.parseFloat(priceArray[index]); 
+					if(match == true) { price = Double.parseDouble(priceArray[a]); System.out.println("match = true"); }
+					else { price = Double.parseDouble(priceArray[index]); System.out.println("match = false");}
+					
 					
 					if(discountCount >= 2) commissionableSales = price * totalDiscountAmt;
-					else commissionableSales = price; 
+					else { commissionableSales = price; }
+					
+					newPrice = price - commissionableSales;
 
 					commissionableSaleTotal.add(totalDiscountAmt + compensation);
 					
 					System.out.println("Item Code: " + itemCode);
 					System.out.println("Commissionable: " + commissionableSales);
 					System.out.println("Price: " + price);
+					System.out.println("Compensation: " + compensation);
 					
 					}
 					
