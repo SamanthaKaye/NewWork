@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class ReadFile {
 
 	public static void main(String[] args) throws Exception{
-		String[] x, z; 
+		String[] x, z; List<Double> commissions;
 		List<String> combinedArray;
 		
 			File f = new File("Payroll Report - Job Items - Samantha.txt");
@@ -29,10 +29,10 @@ public class ReadFile {
 				String data = myFileReader.nextLine();
 				newLines.add(data);	 }
 										
-			calculateDiscounts(lines);
+			commissions = calculateDiscounts(lines);
 			leadGenerated(newLines);
 			matchInvoices(lines, newLines);
-			outputToFile();
+			outputToFile(lines);
 			
 			myReader.close();
 			myFileReader.close();
@@ -48,8 +48,7 @@ public class ReadFile {
 		String[] invoiceArray = new String[itemsArray.length];
 		List<Double> commissionableSaleTotal = new ArrayList<>();
 		String[] itemCodeArray = new String[itemsArray.length];
-		double quantity, prices, compensation, totalDiscountAmt, commissionableSales; 
-		float price;
+		double quantity, prices, compensation, totalDiscountAmt, commissionableSales, price, newPrice;; 
 		String itemCode, thisItem = " ", currentInvoice, currentString, currentLine, previousInvoice;
 		boolean isDiscount = false, commissionDrop, match; int discountCount = 0, index = 0;
 		
@@ -81,16 +80,11 @@ public class ReadFile {
 					for(int a = 1; a < itemsArray.length - 2; a++) {
 					currentInvoice = invoiceArray[a];
 					previousInvoice = invoiceArray[a - 1];
-
-					System.out.println(currentInvoice + " / " + previousInvoice);
-					
+	
 					
 					
 					quantity = Double.parseDouble(quantityArray[a]);
 					itemCode = itemCodeArray[a];
-					
-					System.out.println(itemCode);
-					
 					
 					if(currentInvoice.equals(previousInvoice)) {
 						
@@ -102,22 +96,20 @@ public class ReadFile {
 						if(isDiscount == true) { 
 							discountCount++;
 						}
-						else discountCount = 0;
+						else discountCount = 0; 
 
-						
-						System.out.println(match);
-						System.out.println(discountCount);
 																		
 					}
-					else discountCount = 0; 
+					else discountCount = 0; match = false;
+					
 					
 					//Compensation if no discounts
-					if(itemCode.contains("-L1")){thisItem = "L1"; compensation = 0.08; }											
-					else if(itemCode.contains("-L2")){ thisItem = "L2"; compensation = .10; }
-					else if(itemCode.contains("-L3")){ thisItem = "L3"; compensation = .13; }
-					else if(itemCode.contains("-L4")){ thisItem = "L4"; compensation = .13; }
-					else if(itemCode.contains("-L5")){ thisItem = "L5"; compensation = .13;}
-					else compensation = 0;
+					if(itemCode.contains("-L1")){thisItem = "L1"; compensation = 0.08; index = a; }											
+					else if(itemCode.contains("-L2")){ thisItem = "L2"; compensation = .10; index = a; }
+					else if(itemCode.contains("-L3")){ thisItem = "L3"; compensation = .13; index = a; }
+					else if(itemCode.contains("-L4")){ thisItem = "L4"; compensation = .13; index = a; }
+					else if(itemCode.contains("-L5")){ thisItem = "L5"; compensation = .13; index = a; }
+					else compensation = 0; index = a;
 					
 					//Compensation if 1 discount
 					if(discountCount == 1) {
@@ -145,21 +137,17 @@ public class ReadFile {
 					}
 					
 					totalDiscountAmt = discountCount * .05;
-					price = Float.parseFloat(priceArray[a]); 
+					if(isDiscount == true) newPrice = price - commissionableSales;
+					else price = Float.parseFloat(priceArray[index]); 
+					
 					if(discountCount >= 2) commissionableSales = price * totalDiscountAmt;
 					else commissionableSales = price; 
-					
-					System.out.println("Commissionable: " + price);
-					
-					System.out.println("Discount percent: " + totalDiscountAmt);
-					
-					System.out.println("Compensation: " + compensation);
-					
+
 					commissionableSaleTotal.add(totalDiscountAmt + compensation);
 					
-					System.out.println(" ***** ");
-					
-					
+					System.out.println("Item Code: " + itemCode);
+					System.out.println("Commissionable: " + commissionableSales);
+					System.out.println("Price: " + price);
 					
 					}
 					
@@ -168,16 +156,69 @@ public class ReadFile {
 		
 		}
 	
-	public static void leadGenerated(List<String> lines) {
+	public static Double[] leadGenerated(List<String> newLines) {
+		String[] leadArray = new String[newLines.size()];
+		String[] temp = new String[leadArray.length];
+		String[] leadGen = new String[leadArray.length];
+		String[] invoiceArray = new String[leadArray.length];
+		Double[] commission = new Double[leadArray.length];
+		
+		for (int i =0; i < newLines.size(); i++) {
+			leadArray[i] = newLines.get(i);
+		}
+		
+		int x = 0, y = 0;
+		for(int i = 0; i < leadArray.length; i++) {
+			
+			String str = leadArray[i];
+			String strTwo = str.substring(0);
+			temp = strTwo.split("	");	
+			
+			for(int a = 0; a < temp.length; a++) {
+				
+				if(a == 0) 
+					{invoiceArray[x] = temp[a]; x++; }	
+				if(a == 1) 
+					{leadGen[y] = temp[a]; y++; }
+				
+			}
+		}
+		
+		for(int i = 0; i < leadArray.length; i++) {
+			if(leadGen[i].contains("Erin McDaniel")) commission[i] = .03;
+			else commission[i] = .05;
+			
+			
+		}
+		
+		return commission;
+	}
+	
+	public static void calculateCommByTech() {
+		
 		
 	}
 	
 	
 	public static void  matchInvoices(List<String> lines, List<String> newLines) {
+		String[] leadArray = new String[newLines.size()];
+		String[] itemsArray = new String[lines.size()];
+		String currentInvoice, currentLine, currentString;
+		List<String> matchedInvoiceLines = new ArrayList<>();
+		
+		for (int i =0; i < lines.size(); i++) {
+			itemsArray[i] = lines.get(i);
+		}
+		
+		for(int a =0; a < newLines.size(); a++) {
+			leadArray[a] = newLines.get(a);
+		}
+		
+	
 		
 	}
 	
-	public static void outputToFile() throws Exception {
+	public static void outputToFile(List<String> lines) throws Exception {
 		
 		try {
 
@@ -187,7 +228,9 @@ public class ReadFile {
 	         } 
 	         FileWriter fw = new FileWriter(file.getAbsoluteFile());
 	         BufferedWriter bw = new BufferedWriter(fw);
-	         bw.write("test");
+	         for(int i = 0; i < lines.size(); i++) {
+	        	 bw.write(lines.get(i) + "\n"); }
+	         
 	         bw.close();
 	         
 	         System.out.println("Done");
