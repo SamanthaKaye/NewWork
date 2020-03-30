@@ -1,0 +1,30 @@
+Item Code	Primary Technician	Sold By Technician	Invoice Number	Item Price	Item Quantity	Job Business Unit
+FWSLB02BB	Vincent Lara	Vincent Lara	1000001	1000.00	1.00	Plumbing Service
+FWSLB02BB	Vincent Lara	Vincent Lara	1000001	1000.00	1.00	Plumbing Service
+DIGSB16BB	Vincent Lara	Vincent Lara	1000002	1000.00	2.00	Plumbing Service
+FWSLB02BB	Vincent Lara	Vincent Lara	1000002	1000.00	1.00	Plumbing Service
+DIGSB16BB	Vincent Lara	Vincent Lara	1000003	1000.00	20.00	Plumbing Service
+T501132	Vincent Lara	Vincent Lara	1000003	1000.00	1.00	Plumbing Service
+T501132	Vincent Lara	Vincent Lara	1000004	1000.00	1.00	Plumbing Service
+T501159	Vincent Lara	Vincent Lara	1000005	2000.00	1.00	Plumbing Service
+T502099	Vincent Lara	Vincent Lara	1000006	1000.00	5.00	Plumbing Service
+T501631	Vincent Lara	Vincent Lara	1000007	2000.00	1.00	Plumbing Service
+T600276	Jose Aguilera		1000008	1000.00	1.00	HVAC Service
+aaaaaaaaaa-aa-L1	Gus Cisneros	Kelly Kindade	1000009	1000.00	1.00	HVAC Service
+disc999003	Gus Cisneros	Kelly Kindade	1000009	-47.50	2.00	HVAC Service
+disc999002	Gus Cisneros	Kelly Kindade	1000009	-50.00	1.00	HVAC Service
+aaaaaaaaaa-aa-L2	Gus Cisneros	Kelly Kindade	1000010	2000.00	1.00	HVAC Service
+disc999002	Gus Cisneros	Kelly Kindade	1000010	-50.00	1.00	HVAC Service
+aaaaaaaaaa-aa-L3	Gus Cisneros	Kelly Kindade	1000011	1000.00	1.00	HVAC Service
+disc999002	Gus Cisneros	Kelly Kindade	1000011	-50.00	1.00	HVAC Service
+aaaaaaaaaa-aa-L4	Gus Cisneros	Kelly Kindade	1000012	1000.00	1.00	HVAC Service
+disc999002	Gus Cisneros	Kelly Kindade	1000012	-50.00	1.00	HVAC Service
+aaaaaaaaaa-aa-L5	Gus Cisneros	Kelly Kindade	1000013	1000.00	1.00	HVAC Service
+disc999002	Gus Cisneros	Kelly Kindade	1000013	-50.00	1.00	HVAC Service
+aaaaaaaaaa-aa-L1	Gus Cisneros	Kelly Kindade	1000014	1000.00	1.00	HVAC Service
+disc999002	Gus Cisneros	Kelly Kindade	1000014	-50.00	1.00	HVAC Service
+T600276	Bruce Brookins		1000015	1000.00	1.00	HVAC Service
+disc999001	Bruce Brookins		1000015	-50.00	1.00	HVAC Service
+T600360	Ricky Macias	John Kuykendall	1000016	1000.00	1.00	HVAC SalesInstall
+T600361	Ricky Macias	John Kuykendall	1000017	1000.00	1.00	HVAC SalesInstall
+T999950BB	Ricky Macias	John Kuykendall	1000018	1000.00	1.00	HVAC SalesInstall
